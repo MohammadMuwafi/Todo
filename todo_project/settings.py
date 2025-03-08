@@ -26,13 +26,8 @@ SECRET_KEY = 'django-insecure-%u*i=0)rno&d01p!z!cms+=_6xi@off)0&j4)oav8cve_g#+_i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-print("DOMAIN_NAME:", os.getenv('DOMAIN_NAME'))
-print("PRIVATE_HOST_IP:", os.getenv('PRIVATE_HOST_IP'))
-print("ALB_IPS:", os.getenv('ALB_IPS'))
-# ALLOWED_HOSTS = [ os.getenv('DOMAIN_NAME'), os.getenv('PRIVATE_HOST_IP'), os.getenv('ALB_IPS'), "localhost", "127.0.0.1"]
-# print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
-ALLOWED_HOSTS = [ "*" ]
-
+ALLOWED_HOSTS = []
+print("ALLOWED_HOSTS: ", os.getenv('ALLOWED_HOSTS'))
 
 # Application definition
 
@@ -90,6 +85,10 @@ print("DB_HOST:", os.getenv('DB_HOST'))
 print("DB_PORT:", os.getenv('DB_PORT'))
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
         'ENGINE': os.getenv('DB_ENGINE'),
         'NAME': os.getenv('DB_NAME'),
@@ -99,6 +98,7 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -142,9 +142,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-# settings.py
 
 LOGGING = {
     'version': 1,

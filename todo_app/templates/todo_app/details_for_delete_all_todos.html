@@ -1,0 +1,13 @@
+{% extends "todo_app/base.html" %} 
+{% block title %}Delete All Todos Page{% endblock %} 
+{% block content %}
+    <form action="{% url 'todo_app:delete_all_todos' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="delete all todos and go back" />
+    </form>
+    
+    <a href="{% url 'todo_app:home' %}"><button>go back only</button> </a>       
+{% endblock %}
+
+
+

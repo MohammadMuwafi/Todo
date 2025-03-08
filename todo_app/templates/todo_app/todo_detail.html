@@ -1,0 +1,13 @@
+{% extends "todo_app/base.html" %} 
+{% block title %}Todo Page{% endblock %} 
+{% block content %}
+    <p><label>Todo Title: {{object.title}}</label></p>
+    <p><label>Todo Content:</label></p>
+    <p>
+        <textarea name="todo_content" rows="10" cols="30" readonly>
+            {{object.content}} 
+        </textarea>
+    </p>
+    <a href="{% url 'todo_app:home' %}"> <h1>go to home page</h1> </a>
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends "todo_app/base.html" %} 
+{% block title %}Home Page{% endblock %} 
+{% block content %}
+    <a href="{% url 'todo_app:home' %}"> <h1>Welcome to Todo app</h1> </a>
+    <div class="container">
+    <form action="{% url 'todo_app:search_todo' %}" method="get">
+        {% csrf_token %}
+        <input
+        class="search-bar"
+        type="text"
+        name="search-bar"
+        placeholder="Search for todo by title.."
+        />
+        <button type="submit">search</button>
+    </form>
+
+    {% if todo_list %}
+    <form>
+        <table>
+        <tr>
+            <th>Todo ID</th>
+            <th>Todo Title</th>
+            <th>Read Operation</th>
+            <th>Update Operation</th>
+            <th>Delete Operation</th>
+            <!-- <th>check to delete</th> -->
+        </tr>
+
+        {% for todo in todo_list %}
+        <tr>
+            <td>{{ todo.id }}</td>
+            <td>{{ todo.title }}</td>
+            <td>
+            <a href="{% url 'todo_app:todo_detail' todo.id %}">read</a>
+            </td>
+            <td>
+            <a href="{% url 'todo_app:todo_update' todo.id %}">update</a>
+            </td>
+            <td>
+            <a href="{% url 'todo_app:todo_delete' todo.id %}">delete</a>
+            </td>
+            <!-- <td><input type="checkbox" name="todo" value="{{todo.id}}"> -->
+        </tr>
+        {% endfor %}
+        </table>
+    </form>
+    {% else %}
+    <p>No todos are available.</p>
+    {% endif %}
+
+    <a href="{% url 'todo_app:todo_create' %}"
+        ><button>add new todo</button>
+    </a>
+    <a href="{% url 'todo_app:details_for_delete_all_todos' %}"
+        ><button>delete all todos</button>
+    </a>
+    </div>
+{% endblock %}
